@@ -14,7 +14,7 @@ theming variables.
 - `primary` Boolean. Set when ripple is to be shown in primary color.
 - `secondary` Boolean, Set when ripple is to be shown in secondary color.
 - `disabled` Boolean. Set when disabled. e.g. When icon-button is disabled, no ripple is to be shown.
-- `unbound` Boolean. By defualt ripple effect are shown from the point where user clicks. If we want to show ripple 
+- `unbounded` Boolean. By defualt ripple effect are shown from the point where user clicks. If we want to show ripple 
 always from the center (irrespective of the click position) then set to `true`.
 
 ## Theming

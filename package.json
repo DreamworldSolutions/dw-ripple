@@ -1,0 +1,26 @@
+{
+  "name": "@dw/dw-ripple",
+  "version": "1.0.0-SNAPSHOT",
+  "description": "Ripple element created as child-class of [`mwc-ripple`] (https://github.com/material-components/material-components-web-components/tree/master/packages/ripple)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DreamworldSolutions/dw-ripple.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DreamworldSolutions/dw-ripple/issues"
+  },
+  "homepage": "https://github.com/DreamworldSolutions/dw-ripple#readme",
+  "dependencies": {
+    "@material/mwc-ripple": "^0.7.1",
+    "lit-element": "^2.2.0"
+  },
+  "devDependencies": {
+    "@webcomponents/webcomponentsjs": "^2.2.10"
+  }
+}
