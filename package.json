@@ -1,6 +1,6 @@
 {
-  "name": "@dw/dw-ripple",
-  "version": "1.0.0-SNAPSHOT",
+  "name": "@dreamworld/dw-ripple",
+  "version": "0.0.0-development",
   "description": "Ripple element created as child-class of [`mwc-ripple`] (https://github.com/material-components/material-components-web-components/tree/master/packages/ripple)",
   "main": "index.js",
   "scripts": {
@@ -21,6 +21,10 @@
     "lit-element": "^2.2.0"
   },
   "devDependencies": {
-    "@webcomponents/webcomponentsjs": "^2.2.10"
+    "@webcomponents/webcomponentsjs": "^2.2.10",
+    "semantic-release": "beta"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
