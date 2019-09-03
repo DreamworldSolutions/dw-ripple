@@ -15,7 +15,8 @@ theming variables.
 - `secondary` Boolean, Set when ripple is to be shown in secondary color.
 - `disabled` Boolean. Set when disabled. e.g. When icon-button is disabled, no ripple is to be shown.
 - `unbounded` Boolean. By defualt ripple effect are shown from the point where user clicks. If we want to show ripple 
-always from the center (irrespective of the click position) then set to `true`.
+always from the center (irrespective of the click position) then set to `true`. When this is set, ripple is shown in 
+circular shape always.
 
 ## Theming
 By default ripple is shown in `--mdc-theme-on-surface`. That should be ok for most places. When need to change it at

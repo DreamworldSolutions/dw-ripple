@@ -19,18 +19,21 @@ export class DWRipple extends Ripple {
     return [
       Ripple.styles,
       css`
-        :host([disabled]) .mdc-ripple-surface::before, .mdc-ripple-surface::after {
-          background-color: transparent;
-        }
-        .mdc-ripple-surface::before, .mdc-ripple-surface::after {
-          background-color: var(--mdc-theme-on-surface, #000);
-        }
-        :host([primary]) .mdc-ripple-surface--primary::before, .mdc-ripple-surface--primary::after{
-          background-color: var(--mdc-theme-primary);
-        }
-        :host([secondary]) .mdc-ripple-surface--accent::before, .mdc-ripple-surface--accent::after {
-          background-color: var(--mdc-theme-secondary);
-        }
+      :host([disabled]) {
+        --mdc-theme-on-surface: transparent;
+      }
+
+      :host([primary]) {
+        --mdc-theme-on-surface: var(--mdc-theme-primary);
+      }
+
+      :host([secondary]) {
+        --mdc-theme-on-surface: var(--mdc-theme-secondary);
+      }
+      
+      .mdc-ripple-surface::before, .mdc-ripple-surface::after {
+        background-color: var(--mdc-theme-on-surface, #000);
+      }
       `
     ];
   }
@@ -39,12 +42,17 @@ export class DWRipple extends Ripple {
     return {
 
       /**
-       * `true` if ripple is shown on secondary color
+       * Set to `true` when ripple is to be shown in primary color.
+       */
+      primary: { type: Boolean, reflect: true },
+
+      /**
+       * Set to `true` when ripple is to be shown in secondary color
        */
       secondary: { type: Boolean, reflect: true },
 
       /**
-       * `true` if ripple is not shown
+       * Set to `true` if ripple should not be shown
        */
       disabled: { type: Boolean, reflect: true }
     }
@@ -52,15 +60,11 @@ export class DWRipple extends Ripple {
 
   constructor(){
     super();
+    this.primary=false;
     this.secondary = false;
     this.disabled = false;
   }
 
-  updated(changedProps){
-    if(changedProps.has('secondary')){
-      this.accent = this.secondary ? true : false;
-    }
-  }
 }
 
 window.customElements.define('dw-ripple', DWRipple);

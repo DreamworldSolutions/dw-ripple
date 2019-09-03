@@ -7,12 +7,20 @@
     <meta name="description" content="dw ripple">
   </head>
   <style>
+    :root {
+      --mdc-theme-on-surface: #000;
+      --mdc-theme-primary: #6200ee;
+      --mdc-theme-secondary: #018786;
+      --mdc-theme-text-disabled:  rgba(0, 0, 0, 0.38);
+    }
+
     h2 {
       margin: 20px 20px 0px 20px;
     }
+
     .demo-box {
-      width: 128px;
-      height: 128px;
+      width: 96px;
+      height: 96px;
       border: 1px solid gray;
       display: inline-flex;
       justify-content: center;
@@ -21,39 +29,34 @@
       padding: 8px;
       margin: 20px;
     }
-    dw-ripple {
-      --mdc-theme-on-surface: #000;
-    }
-    .primary {
-      --mdc-theme-primary: #6200ee;
-    }
-    .secondary {
-      --mdc-theme-secondary: #018786;
-    }
-    .disabled {
-      --mdc-theme-text-disabled:  rgba(0, 0, 0, 0.38);
-      color: var(--mdc-theme-text-disabled)
+
+    .demo-box.custom {
+      --mdc-theme-on-surface: #c11e5c;
     }
   </style>
   <body>
     <h2>Ripple</h2>
     <div class="demo-box">
-      Normal
+      Default
       <dw-ripple></dw-ripple>
     </div>
     <div class="demo-box">
       Primary
-      <dw-ripple class="primary" primary></dw-ripple>
+      <dw-ripple primary></dw-ripple>
     </div>
     <div class="demo-box">
       Secondary
-      <dw-ripple class="secondary" secondary></dw-ripple>
+      <dw-ripple secondary></dw-ripple>
     </div>
+    <div class="demo-box custom">
+        Custom
+        <dw-ripple></dw-ripple>
+      </div>
     <div class="demo-box">
       unbounded
       <dw-ripple unbounded></dw-ripple>
     </div>
-    <div class="demo-box disabled">
+    <div class="demo-box">
       disabled
       <dw-ripple disabled></dw-ripple>
     </div>
