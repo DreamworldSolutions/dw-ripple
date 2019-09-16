@@ -2,7 +2,7 @@
   "name": "@dreamworld/dw-ripple",
   "version": "0.0.0-development",
   "description": "Ripple element created as child-class of [`mwc-ripple`] (https://github.com/material-components/material-components-web-components/tree/master/packages/ripple)",
-  "main": "index.js",
+  "main": "dw-ripple.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
