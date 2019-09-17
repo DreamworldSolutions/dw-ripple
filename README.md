@@ -9,6 +9,30 @@ theming variables.
 - They render ripple always in black color by default. So, it doesn't work on dark theme. We changed default color to 
 `--mdc-theme-on-surface`
 
+## Installation
+
+```html
+	npm install @dw/dw-ripple
+```
+
+## Usage
+
+```html
+    @import '@dw/dw-ripple/dw-ripple';
+		
+		.demo-box {
+			width: 96px;
+			height: 96px;
+			border: 1px solid gray;
+		}
+		
+    <div class="demo-box">
+			Default
+			<dw-ripple></dw-ripple>
+    </div>
+```
+
+## [Demo](https://dreamworldsolutions.github.io/dw-ripple/demo/index.html)
 
 ## Properties
 - `primary` Boolean. Set when ripple is to be shown in primary color.

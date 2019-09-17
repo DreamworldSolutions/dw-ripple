@@ -14,7 +14,7 @@ import { css } from 'lit-element';
 import { Ripple } from '@material/mwc-ripple';
 
 
-export class DWRipple extends Ripple {
+export class DwRipple extends Ripple {
   static get styles() {
     return [
       Ripple.styles,
@@ -67,4 +67,4 @@ export class DWRipple extends Ripple {
 
 }
 
-window.customElements.define('dw-ripple', DWRipple);
+window.customElements.define('dw-ripple', DwRipple);
