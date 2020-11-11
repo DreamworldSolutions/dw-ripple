@@ -8,31 +8,51 @@ Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
 */
 
-import { css } from 'lit-element';
+import { css, html } from 'lit-element';
+import { LitElement } from '@dreamworld/pwa-helpers/lit-element.js';
 
-// These are the mwc element needed by this element.
-import { Ripple } from '@material/mwc-ripple';
-
-
-export class DwRipple extends Ripple {
+export class DwRipple extends LitElement {
   static get styles() {
     return [
-      Ripple.styles,
       css`
+      :host {
+        border-radius: 50%;
+        transform: scale(0);
+        opacity: .12;
+        background-color: var(--mdc-theme-on-surface);
+      }
+
       :host([disabled]) {
-        --mdc-theme-on-surface: transparent;
+        background-color: transparent;
+      }
+
+      :host(:not([unbounded])[active]) {
+        animation: ripple 350ms linear;
+      }
+
+      :host([unbounded][active]) {
+        animation: unbounded-ripple 350ms linear;
       }
 
       :host([primary]) {
-        --mdc-theme-on-surface: var(--mdc-theme-primary);
+        background-color: var(--mdc-theme-primary);
       }
 
       :host([secondary]) {
-        --mdc-theme-on-surface: var(--mdc-theme-secondary);
+        background-color: var(--mdc-theme-secondary);
       }
-      
-      .mdc-ripple-surface::before, .mdc-ripple-surface::after {
-        background-color: var(--mdc-theme-on-surface, #000);
+
+      @keyframes ripple {
+        to {
+          transform: scale(4);
+        }
+      }
+
+
+      @keyframes unbounded-ripple {
+        to {
+          transform: scale(1);
+        }
       }
       `
     ];
@@ -42,29 +62,80 @@ export class DwRipple extends Ripple {
     return {
 
       /**
-       * Set to `true` when ripple is to be shown in primary color.
-       */
-      primary: { type: Boolean, reflect: true },
-
-      /**
-       * Set to `true` when ripple is to be shown in secondary color
-       */
-      secondary: { type: Boolean, reflect: true },
-
-      /**
        * Set to `true` if ripple should not be shown
        */
-      disabled: { type: Boolean, reflect: true }
+      disabled: { type: Boolean, reflect: true },
+
+      /**
+       * Set to true when ripple shows as an unbounded.
+       */
+      unbounded: { type: Boolean, reflect: true }
     }
   }
 
   constructor(){
     super();
-    this.primary=false;
-    this.secondary = false;
     this.disabled = false;
+    this.unbounded = false;
+    this.__activeRipple = this.__activeRipple.bind(this);
   }
 
+
+  connectedCallback() {
+    super.connectedCallback && super.connectedCallback();
+    if(this.parentNode) {
+      this.parentNode.addEventListener('click', this.__activeRipple);
+    }
+  }
+
+  disconnectedCallback() {
+    if(this.parentNode) {
+      this.parentNode.removeEventListener('click', this.__activeRipple);
+    }
+    super.disconnectedCallback && super.disconnectedCallback();
+  }
+
+  render() {
+    return html`
+    `;
+  }
+
+
+  /**
+   * Active ripple on button click event.
+   * @private
+   */
+  __activeRipple(event) {
+    let button = event.currentTarget;
+
+    //If parent is not found;
+    if(!button) {
+      console.warn('Ripple button is not found');
+      return;
+    }
+
+    this.removeAttribute('active');
+
+    let diameter = Math.max(button.clientWidth, button.clientHeight);
+    let radius = diameter / 2;
+    
+    let top = 0;
+    let left = 0;
+
+    if(!this.unbounded) {
+      top = event.clientY - button.offsetTop - radius;
+      left = event.clientX - button.offsetLeft - radius;
+    }
+
+    //Change ripple styles
+    this.style.position = 'absolute';
+    this.style.width = this.style.height = `${diameter}px`;
+    this.style.left = `${left}px`;
+    this.style.top = `${top}px`;
+
+    //Add attribute for active ripple animation.
+    this.setAttribute('active', '');
+  }
 }
 
 window.customElements.define('dw-ripple', DwRipple);
