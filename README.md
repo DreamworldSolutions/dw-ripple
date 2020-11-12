@@ -41,7 +41,7 @@ Shows a ripple effect based ripple color and opacity.
 ## Theming
 - `color`: By default ripple is shown in `--mdc-theme-on-surface`. That should be ok for most places. When need to change it at special place, change host background-color css property of dw-ripple OR set `--mdc-theme-on-surface` CSS property to any other color
 
-- `opacity`: By default ripple opacity is 0.12, That should be ok for most places. when need to change it special place, then directly change host opacity of dw-ripple.
+- `opacity`: By default ripple opacity is 0.25, That should be ok for most places. when need to change it special place, then directly change host opacity of dw-ripple.
 
 
 ## How it's work?
