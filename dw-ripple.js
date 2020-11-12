@@ -18,7 +18,7 @@ export class DwRipple extends LitElement {
       :host {
         border-radius: 50%;
         transform: scale(0);
-        opacity: .12;
+        opacity: .25;
         background-color: var(--mdc-theme-on-surface);
       }
 
@@ -45,6 +45,7 @@ export class DwRipple extends LitElement {
       @keyframes ripple {
         to {
           transform: scale(4);
+          opacity: 0.12;
         }
       }
 
@@ -52,6 +53,7 @@ export class DwRipple extends LitElement {
       @keyframes unbounded-ripple {
         to {
           transform: scale(1);
+          opacity: 0.12;
         }
       }
       `
