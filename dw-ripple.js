@@ -19,7 +19,7 @@ export class DwRipple extends LitElement {
         border-radius: 50%;
         transform: scale(0);
         opacity: .25;
-        background-color: var(--mdc-theme-on-surface);
+        background-color: var(--dw-ripple-color, var(--mdc-theme-on-surface));
       }
 
       :host([disabled]) {
@@ -35,11 +35,11 @@ export class DwRipple extends LitElement {
       }
 
       :host([primary]) {
-        background-color: var(--mdc-theme-primary);
+        --dw-ripple-color: var(--mdc-theme-primary);
       }
 
       :host([secondary]) {
-        background-color: var(--mdc-theme-secondary);
+        --dw-ripple-color: var(--mdc-theme-secondary);
       }
 
       @keyframes ripple {

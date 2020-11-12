@@ -44,7 +44,7 @@ export class DwRippleDemo extends LitElement {
         }
 
         .demo-box.custom {
-          --mdc-theme-on-surface: #c11e5c;
+          --dw-ripple-color: #c11e5c;
         }
 
         mwc-formfield {

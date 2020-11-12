@@ -39,7 +39,7 @@ Shows a ripple effect based ripple color and opacity.
 - `unbounded` Boolean. By defualt ripple effect are shown from the point where user clicks. If we want to show ripple always from the center (irrespective of the click position) then set to `true`. When this is set, ripple is shown in circular shape always.
 
 ## Theming
-- `color`: By default ripple is shown in `--mdc-theme-on-surface`. That should be ok for most places. When need to change it at special place, change host background-color css property of dw-ripple OR set `--mdc-theme-on-surface` CSS property to any other color
+- `color`: By default ripple is shown in `--mdc-theme-on-surface`. That should be ok for most places. When need to change it at special place, change host background-color css property of dw-ripple OR set `--dw-ripple-color` CSS property to any other color
 
 - `opacity`: By default ripple opacity is 0.25, That should be ok for most places. when need to change it special place, then directly change host opacity of dw-ripple.
 
