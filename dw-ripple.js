@@ -27,11 +27,15 @@ export class DwRipple extends LitElement {
       }
 
       :host(:not([unbounded])[active]) {
-        animation: ripple 350ms linear;
+        animation-name: ripple;
+        animation-duration: 350ms;  
+        animation-timing-function: linear;
       }
 
       :host([unbounded][active]) {
-        animation: unbounded-ripple 350ms linear;
+        animation-name: unbounded-ripple;
+        animation-duration: 350ms;  
+        animation-timing-function: ease;
       }
 
       :host([primary]) {
@@ -45,7 +49,7 @@ export class DwRipple extends LitElement {
       @keyframes ripple {
         to {
           transform: scale(4);
-          opacity: 0.12;
+          opacity: 0;
         }
       }
 
@@ -53,7 +57,7 @@ export class DwRipple extends LitElement {
       @keyframes unbounded-ripple {
         to {
           transform: scale(1);
-          opacity: 0.12;
+          opacity: 0;
         }
       }
       `
