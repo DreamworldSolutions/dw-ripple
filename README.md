@@ -1,6 +1,6 @@
 # dw-ripple
 
-Shows a ripple effect based ripple color and opacity.
+Shows ripple effect on the click of the parent element. By default ripple is shown in the on-surface color. But, you have options to show it either in the primary, secondary or even any other color.
 
 ## Installation
 
@@ -9,7 +9,7 @@ Shows a ripple effect based ripple color and opacity.
 ```
 
 ## Usage
-- Applied `position: relative;` and `overflow: hidden;` styles to ripple parent. Please see below example
+- Apply `position: relative;` and `overflow: hidden;` styles to ripple parent. Please see below example
 
 ```html
     @import '@dw/dw-ripple/dw-ripple';
@@ -30,19 +30,13 @@ Shows a ripple effect based ripple color and opacity.
 
 ## [Demo](https://dreamworldsolutions.github.io/dw-ripple/demo/index.html)
 
-## Attributes
+## Properties
 - `primary` Set when ripple is to be shown in primary color.
 - `secondary` Set when ripple is to be shown in secondary color.
-
-## Properties
 - `disabled` Boolean. Set when disabled. e.g. When icon-button is disabled, no ripple is to be shown.
 - `unbounded` Boolean. By defualt ripple effect are shown from the point where user clicks. If we want to show ripple always from the center (irrespective of the click position) then set to `true`. When this is set, ripple is shown in circular shape always.
 
 ## Theming
 - `color`: By default ripple is shown in `--mdc-theme-on-surface`. That should be ok for most places. When need to change it at special place, change host background-color css property of dw-ripple OR set `--dw-ripple-color` CSS property to any other color
 
-- `opacity`: By default ripple opacity is 0.25, That should be ok for most places. when need to change it special place, then directly change host opacity of dw-ripple.
-
-
-## How it's work?
-- Bind parent element click event, on Click of parent show/active ripple.
+- `opacity`: By default ripple opacity is 0.20, That should be ok for most places. when need to change it special place, then directly change host opacity of dw-ripple.

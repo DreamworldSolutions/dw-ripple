@@ -16,9 +16,10 @@ export class DwRipple extends LitElement {
     return [
       css`
       :host {
+        position: absolute;
         border-radius: 50%;
         transform: scale(0);
-        opacity: .25;
+        opacity: .20;
         background-color: var(--dw-ripple-color, var(--mdc-theme-on-surface));
       }
 
@@ -26,18 +27,27 @@ export class DwRipple extends LitElement {
         background-color: transparent;
       }
 
-      :host(:not([unbounded])[active]) {
+      :host(:not([fadeout]):not([unbounded])[active-ripple]) {
         animation-name: ripple;
         animation-duration: 350ms;  
         animation-timing-function: linear;
+        animation-fill-mode: forwards;
       }
 
-      :host([unbounded][active]) {
+      :host(:not([fadeout])[unbounded][active-ripple]) {
         animation-name: unbounded-ripple;
         animation-duration: 350ms;  
-        animation-timing-function: ease;
+        animation-timing-function: linear;
+        animation-fill-mode: forwards;
       }
 
+      :host([fadeout]) {
+        animation-name: fadeout;
+        animation-duration: 350ms; 
+        animation-timing-function: ease-out;
+        animation-fill-mode: forwards;
+      }
+ 
       :host([primary]) {
         --dw-ripple-color: var(--mdc-theme-primary);
       }
@@ -49,7 +59,6 @@ export class DwRipple extends LitElement {
       @keyframes ripple {
         to {
           transform: scale(4);
-          opacity: 0;
         }
       }
 
@@ -57,6 +66,11 @@ export class DwRipple extends LitElement {
       @keyframes unbounded-ripple {
         to {
           transform: scale(1);
+        }
+      }
+
+      @keyframes fadeout {
+        to { 
           opacity: 0;
         }
       }
@@ -66,6 +80,16 @@ export class DwRipple extends LitElement {
 
   static get properties(){
     return {
+
+      /**
+       * Set to `true` when ripple is to be shown in primary color.
+       */
+      primary: { type: Boolean, reflect: true },
+
+      /**
+       * Set to `true` when ripple is to be shown in secondary color
+       */
+      secondary: { type: Boolean, reflect: true },
 
       /**
        * Set to `true` if ripple should not be shown
@@ -83,21 +107,29 @@ export class DwRipple extends LitElement {
     super();
     this.disabled = false;
     this.unbounded = false;
-    this.__activeRipple = this.__activeRipple.bind(this);
+    this.__onStart = this.__onStart.bind(this);
+    this.__fadeOut = this.__fadeOut.bind(this);
+
+    /**
+     * It's data-type is Promise. Default value is the Promise which is resolved immediately.
+     * Later on, it's value will be changed when entry animation is started (__scale).
+     * And when entry animation is completed, that promise gets resolved.
+     */
+    this.__waitForEntryAnimation = new Promise( (resolve) => {resolve()});
   }
 
 
   connectedCallback() {
     super.connectedCallback && super.connectedCallback();
-    if(this.parentNode) {
-      this.parentNode.addEventListener('click', this.__activeRipple);
-    }
+    this.updateComplete.then(() => {
+      this.__bindActiveEvents();
+      this.__bindInactiveEvents();
+    });
   }
 
   disconnectedCallback() {
-    if(this.parentNode) {
-      this.parentNode.removeEventListener('click', this.__activeRipple);
-    }
+    this.__unbindActiveEvents();
+    this.__unbindInactiveEvents();
     super.disconnectedCallback && super.disconnectedCallback();
   }
 
@@ -108,39 +140,97 @@ export class DwRipple extends LitElement {
 
 
   /**
-   * Active ripple on button click event.
+   * Bind active ripple events.
    * @private
    */
-  __activeRipple(event) {
-    let button = event.currentTarget;
+  __bindActiveEvents() {
+    this.parentNode && this.parentNode.addEventListener('mousedown', this.__onStart);
+    this.parentNode && this.parentNode.addEventListener('touchstart', this.__onStart);
+  }
 
-    //If parent is not found;
-    if(!button) {
-      console.warn('Ripple button is not found');
-      return;
-    }
+  /**
+   * unbind active ripple events.
+   * @private
+   */
+  __unbindActiveEvents() {
+    this.parentNode && this.parentNode.removeEventListener('mousedown', this.__onStart);
+    this.parentNode && this.parentNode.removeEventListener('touchstart', this.__onStart);
+  }
 
-    this.removeAttribute('active');
+  /**
+   * Bind remove/in-active ripple events.
+   * @private
+   */
+  __bindInactiveEvents() {
+    this.parentNode && this.parentNode.addEventListener('mouseup', this.__fadeOut);
+    this.parentNode && this.parentNode.addEventListener('mouseleave', this.__fadeOut);
+    this.parentNode && this.parentNode.addEventListener('touchend', this.__fadeOut);
+  }
 
-    let diameter = Math.max(button.clientWidth, button.clientHeight);
+  /**
+   * unbind remove/in-active ripple events.
+   * @private
+   */
+  __unbindInactiveEvents() {
+    this.parentNode && this.parentNode.removeEventListener('mouseup', this.__fadeOut);
+    this.parentNode && this.parentNode.removeEventListener('mouseleave', this.__fadeOut);
+    this.parentNode && this.parentNode.removeEventListener('touchend', this.__fadeOut);
+  }
+
+  /**
+   * Fade out a current active ripple.
+   * Waits till the scale animation is completed, and then performs the fadeout animation
+   * @private
+   */
+  __fadeOut() {
+    this.__waitForEntryAnimation.then(() => {
+      this.removeAttribute('active-ripple');
+      this.setAttribute('fadeout', '');
+    })
+  }
+
+  /**
+   * Invoked on ripple active events.
+   * Set's ripple top left position and active a ripple animation.
+   * @private
+   */
+  __onStart(event) {
+    let parentEl = event.currentTarget;
+
+    let diameter = Math.max(parentEl.clientWidth, parentEl.clientHeight);
     let radius = diameter / 2;
-    
+
     let top = 0;
     let left = 0;
 
     if(!this.unbounded) {
-      top = event.clientY - button.offsetTop - radius;
-      left = event.clientX - button.offsetLeft - radius;
+      top = event.clientY - parentEl.offsetTop - radius;
+      left = event.clientX - parentEl.offsetLeft - radius;
     }
 
     //Change ripple styles
-    this.style.position = 'absolute';
     this.style.width = this.style.height = `${diameter}px`;
     this.style.left = `${left}px`;
     this.style.top = `${top}px`;
+    this.__scale();
+  }
 
-    //Add attribute for active ripple animation.
-    this.setAttribute('active', '');
+  /**
+   * Performs entry (scale) animation.
+   * @private
+   */
+  __scale() {
+    this.removeAttribute('fadeout');
+
+    let resolve, reject;
+    let promise = new Promise((res, rej) => { resolve = res, reject = rej; });
+    this.__waitForEntryAnimation = promise;
+
+    //Add attribute for active-ripple ripple animation.
+    this.setAttribute('active-ripple', '');
+    setTimeout(() => {
+      resolve();
+    }, 350);
   }
 }
 
