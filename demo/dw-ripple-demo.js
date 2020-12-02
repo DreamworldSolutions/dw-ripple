@@ -30,6 +30,8 @@ export class DwRippleDemo extends LitElement {
         }
 
         .demo-box {
+          position: relative;
+          overflow: hidden;
           width: 96px;
           height: 96px;
           border: 1px solid gray;
@@ -42,7 +44,7 @@ export class DwRippleDemo extends LitElement {
         }
 
         .demo-box.custom {
-          --mdc-theme-on-surface: #c11e5c;
+          --dw-ripple-color: #c11e5c;
         }
 
         mwc-formfield {
