@@ -145,8 +145,8 @@ export class DwRipple extends LitElement {
    * @private
    */
   __bindActiveEvents() {
-    this.parentNode && this.parentNode.addEventListener('mousedown', this.__onStart);
-    this.parentNode && this.parentNode.addEventListener('touchstart', this.__onStart);
+    this.parentNode && this.parentNode.addEventListener('mousedown', this.__onStart, { passive: true });
+    this.parentNode && this.parentNode.addEventListener('touchstart', this.__onStart, { passive: true });
   }
 
   /**
@@ -154,8 +154,8 @@ export class DwRipple extends LitElement {
    * @private
    */
   __unbindActiveEvents() {
-    this.parentNode && this.parentNode.removeEventListener('mousedown', this.__onStart);
-    this.parentNode && this.parentNode.removeEventListener('touchstart', this.__onStart);
+    this.parentNode && this.parentNode.removeEventListener('mousedown', this.__onStart, { passive: true });
+    this.parentNode && this.parentNode.removeEventListener('touchstart', this.__onStart, { passive: true });
   }
 
   /**
@@ -163,9 +163,9 @@ export class DwRipple extends LitElement {
    * @private
    */
   __bindInactiveEvents() {
-    this.parentNode && this.parentNode.addEventListener('mouseup', this.__fadeOut);
-    this.parentNode && this.parentNode.addEventListener('mouseleave', this.__fadeOut);
-    this.parentNode && this.parentNode.addEventListener('touchend', this.__fadeOut);
+    this.parentNode && this.parentNode.addEventListener('mouseup', this.__fadeOut, { passive: true });
+    this.parentNode && this.parentNode.addEventListener('mouseleave', this.__fadeOut, { passive: true });
+    this.parentNode && this.parentNode.addEventListener('touchend', this.__fadeOut, { passive: true });
   }
 
   /**
@@ -173,9 +173,9 @@ export class DwRipple extends LitElement {
    * @private
    */
   __unbindInactiveEvents() {
-    this.parentNode && this.parentNode.removeEventListener('mouseup', this.__fadeOut);
-    this.parentNode && this.parentNode.removeEventListener('mouseleave', this.__fadeOut);
-    this.parentNode && this.parentNode.removeEventListener('touchend', this.__fadeOut);
+    this.parentNode && this.parentNode.removeEventListener('mouseup', this.__fadeOut, { passive: true });
+    this.parentNode && this.parentNode.removeEventListener('mouseleave', this.__fadeOut, { passive: true });
+    this.parentNode && this.parentNode.removeEventListener('touchend', this.__fadeOut, { passive: true });
   }
 
   /**
