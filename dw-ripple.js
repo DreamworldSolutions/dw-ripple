@@ -16,6 +16,7 @@ export class DwRipple extends LitElement {
     return [
       css`
       :host {
+        pointer-events: none;
         position: absolute;
         border-radius: 50%;
         transform: scale(0);
