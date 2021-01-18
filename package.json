@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/DreamworldSolutions/dw-ripple#readme",
   "dependencies": {
-    "@material/mwc-ripple": "^0.7.1",
+    "@material/mwc-ripple": "0.20.0",
     "lit-element": "^2.2.0"
   },
   "devDependencies": {
@@ -28,7 +28,9 @@
     "@webcomponents/webcomponentsjs": "^2.2.10",
     "semantic-release": "17.0.8"
   },
-  "resolutions": {},
+  "resolutions": {
+    "tslib": "2.1.0"
+  },
   "publishConfig": {
     "access": "public"
   },
