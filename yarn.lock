@@ -31,10 +31,10 @@
     "@polymer/font-roboto" "^3.0.2"
     lit-element "^2.2.0"
 
-"@dreamworld/pwa-helpers@^1.10.0":
-  version "1.10.0"
-  resolved "https://registry.yarnpkg.com/@dreamworld/pwa-helpers/-/pwa-helpers-1.10.0.tgz#acae0fd237bebbbd42869f6c7fbb2b6ea8232a18"
-  integrity sha512-ixhvpT7oc5Cnn2NRykSfGKOs/y3j2qvtsPKkFgbwx4KFS2StT4lkOrxJSnIn5cTi69ib4oIegeNzcVxzMFWnSw==
+"@dreamworld/pwa-helpers@^1.7.1":
+  version "1.7.1"
+  resolved "https://registry.yarnpkg.com/@dreamworld/pwa-helpers/-/pwa-helpers-1.7.1.tgz#37903cc22b8995271906533411165f002be71ed7"
+  integrity sha512-aFJ675QH0yGKL+FdpPSRCdFsWO6B6CMZSxOzVNGlux2jX9faCEHU2iBQR7QfTADABknxrdrvrPQPS4aEH+G2wA==
   dependencies:
     bowser "^2.8.1"
     lit-element "^2.2.1"

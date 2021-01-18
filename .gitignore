@@ -1,5 +1,5 @@
 /node_modules/ 
 /.project
 /.history/
-/.idea
 package-lock.json
+/.idea

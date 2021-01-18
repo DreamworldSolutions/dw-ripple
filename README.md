@@ -1,6 +1,13 @@
 # dw-ripple
 
-Shows ripple effect on the click of the parent element. By default ripple is shown in the on-surface color. But, you have options to show it either in the primary, secondary or even any other color.
+Ripple element created as child-class of [`mwc-ripple`]
+(https://github.com/material-components/material-components-web-components/tree/master/packages/ripple)
+
+## What are the changes in `mwc-ripple`?
+- To show ripple in secondary color, they have used property named `accent`. Which is confusing in terms of standard 
+theming variables.
+- They render ripple always in black color by default. So, it doesn't work on dark theme. We changed default color to 
+`--mdc-theme-on-surface`
 
 ## Installation
 
@@ -9,14 +16,11 @@ Shows ripple effect on the click of the parent element. By default ripple is sho
 ```
 
 ## Usage
-- Apply `position: relative;` and `overflow: hidden;` styles to ripple parent. Please see below example
 
 ```html
     @import '@dw/dw-ripple/dw-ripple';
 		
 		.demo-box {
-			position: relative;
-			overflow: hidden;
 			width: 96px;
 			height: 96px;
 			border: 1px solid gray;
@@ -31,12 +35,16 @@ Shows ripple effect on the click of the parent element. By default ripple is sho
 ## [Demo](https://dreamworldsolutions.github.io/dw-ripple/demo/index.html)
 
 ## Properties
-- `primary` Set when ripple is to be shown in primary color.
-- `secondary` Set when ripple is to be shown in secondary color.
+- `primary` Boolean. Set when ripple is to be shown in primary color.
+- `secondary` Boolean, Set when ripple is to be shown in secondary color.
 - `disabled` Boolean. Set when disabled. e.g. When icon-button is disabled, no ripple is to be shown.
-- `unbounded` Boolean. By defualt ripple effect are shown from the point where user clicks. If we want to show ripple always from the center (irrespective of the click position) then set to `true`. When this is set, ripple is shown in circular shape always.
+- `unbounded` Boolean. By defualt ripple effect are shown from the point where user clicks. If we want to show ripple 
+always from the center (irrespective of the click position) then set to `true`. When this is set, ripple is shown in 
+circular shape always.
 
 ## Theming
-- `color`: By default ripple is shown in `--mdc-theme-on-surface`. That should be ok for most places. When need to change it at special place, change host background-color css property of dw-ripple OR set `--dw-ripple-color` CSS property to any other color
+By default ripple is shown in `--mdc-theme-on-surface`. That should be ok for most places. When need to change it at
+special place, set said CSS property to any other color.
 
-- `opacity`: By default ripple opacity is 0.20, That should be ok for most places. when need to change it special place, then directly change host opacity of dw-ripple.
+
+it's opacity can't be configured as of now. If needed please raise a feature request.
