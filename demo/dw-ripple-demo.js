@@ -39,6 +39,7 @@ export class DwRippleDemo extends LitElement {
           flex-direction: column;
           padding: 8px;
           margin: 20px;
+          position: relative;
         }
 
         .demo-box.custom {
