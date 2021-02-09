@@ -95,7 +95,6 @@ export class DwRipple extends Ripple {
 
   disconnectedCallback() {
     const parent = this.parentNode;
-    console.log('disconne', parent)
     parent.removeEventListener('mouseenter', this._rippleHander.startHover);
     parent.removeEventListener('mouseleave', this._rippleHander.endHover);
     
