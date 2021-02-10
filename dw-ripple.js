@@ -54,12 +54,16 @@ export class DwRipple extends Ripple {
     this.primary = false;
     this.secondary = false;
     this.disabled = false;
+  }
+
+  connectedCallback() {
+    super.connectedCallback && super.connectedCallback();
     this.__init();
   }
 
   __init() {
     this._rippleHander = new RippleHandlers(async () => this);
-    const parent = this.parentNode;
+    const parent = this.__getParentNode();
     this.__onMouseDown = this.__onMouseDown.bind(this);
     this.__onTouchStart = this.__onTouchStart.bind(this);
     this.__onMouseUp = this.__onMouseUp.bind(this);
@@ -93,8 +97,16 @@ export class DwRipple extends Ripple {
     this._rippleHander.endPress();
   }
 
+  __getParentNode() {
+    let parent = this.parentNode;
+    if (parent instanceof ShadowRoot) {
+      parent = parent.host;
+    }
+    return parent;
+  }
+
   disconnectedCallback() {
-    const parent = this.parentNode;
+    const parent = this.__getParentNode();
     parent.removeEventListener('mouseenter', this._rippleHander.startHover);
     parent.removeEventListener('mouseleave', this._rippleHander.endHover);
     
