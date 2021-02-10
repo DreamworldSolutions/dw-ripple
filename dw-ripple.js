@@ -107,13 +107,15 @@ export class DwRipple extends Ripple {
 
   disconnectedCallback() {
     const parent = this.__getParentNode();
-    parent.removeEventListener('mouseenter', this._rippleHander.startHover);
-    parent.removeEventListener('mouseleave', this._rippleHander.endHover);
-    
-    parent.removeEventListener('mousedown', this.__onMouseDown);
-    parent.removeEventListener('touchstart', this.__onTouchStart);
-    parent.removeEventListener('focus', this._rippleHander.startFocus);
-    parent.removeEventListener('blur', this._rippleHander.endFocus);
+    if (parent) {
+      parent.removeEventListener('mouseenter', this._rippleHander.startHover);
+      parent.removeEventListener('mouseleave', this._rippleHander.endHover);
+
+      parent.removeEventListener('mousedown', this.__onMouseDown);
+      parent.removeEventListener('touchstart', this.__onTouchStart);
+      parent.removeEventListener('focus', this._rippleHander.startFocus);
+      parent.removeEventListener('blur', this._rippleHander.endFocus);
+    }
 
     window.removeEventListener('touchend', this.__onTouchEnd);
     window.removeEventListener('mouseup', this.__onMouseUp);
