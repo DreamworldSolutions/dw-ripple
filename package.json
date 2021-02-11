@@ -27,7 +27,7 @@
     "@material/mwc-formfield": "0.20.0",
     "@material/mwc-switch": "0.20.0",
     "@webcomponents/webcomponentsjs": "^2.2.10",
-    "semantic-release": "17.0.8"
+    "semantic-release": "17.2.3"
   },
   "resolutions": {
     "tslib": "2.1.0"
