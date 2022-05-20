@@ -18,16 +18,16 @@
   },
   "homepage": "https://github.com/DreamworldSolutions/dw-ripple#readme",
   "dependencies": {
-    "@material/mwc-ripple": "0.20.0",
+    "@material/mwc-ripple": "^0.26.1",
     "lit-element": "^2.2.0"
   },
   "devDependencies": {
     "@dreamworld/material-styles": "^1.1.0",
     "@dreamworld/pwa-helpers": "^1.10.0",
-    "@material/mwc-formfield": "0.20.0",
-    "@material/mwc-switch": "0.20.0",
+    "@material/mwc-formfield": "^0.26.1",
+    "@material/mwc-switch": "^0.26.1",
     "@webcomponents/webcomponentsjs": "^2.2.10",
-    "semantic-release": "17.2.3"
+    "semantic-release": "17.4.2"
   },
   "resolutions": {
     "tslib": "2.1.0"
