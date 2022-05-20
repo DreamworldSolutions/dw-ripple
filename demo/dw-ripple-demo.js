@@ -57,8 +57,8 @@ export class DwRippleDemo extends LitElement {
     return html`
       <section class="main">
         <mwc-formfield label="Enable dark theme">
-          <mwc-switch @change="${(e) => {
-              if (e.target.checked) {
+          <mwc-switch @click="${(e) => {
+              if (e.target.selected) {
                 this.setAttribute('dark-theme', e.detail);
                 return;
               }
