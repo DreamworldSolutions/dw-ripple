@@ -1,23 +1,23 @@
-import { html, css } from 'lit-element';
-import { LitElement } from '@dreamworld/pwa-helpers/lit-element.js';
+import { html, css } from "lit-element";
+import { LitElement } from "@dreamworld/pwa-helpers/lit-element.js";
 
 //These are the dw element needed by this element.
-import '../dw-ripple.js';
+import "../dw-ripple.js";
 
 // These are the dw styles element needed by this element.
-import { ThemeStyle } from '@dreamworld/material-styles/theme.js';
+import { ThemeStyle } from "@dreamworld/material-styles/theme.js";
 
 //These are the mwc element needed by this element.
-import '@material/mwc-switch';
-import '@material/mwc-formfield';
+import "@material/mwc-switch";
+import "@material/mwc-formfield";
 
 export class DwRippleDemo extends LitElement {
   static get styles() {
     return [
       ThemeStyle,
       css`
-       :host {
-          display:block;
+        :host {
+          display: block;
           color: var(--mdc-theme-text-primary);
         }
 
@@ -49,54 +49,30 @@ export class DwRippleDemo extends LitElement {
         mwc-formfield {
           --mdc-theme-text-primary-on-background: var(--mdc-theme-text-primary);
         }
-      `
-    ]
+      `,
+    ];
   }
 
   render() {
     return html`
       <section class="main">
         <mwc-formfield label="Enable dark theme">
-          <mwc-switch @click="${(e) => {
+          <mwc-switch
+            @click="${(e) => {
               if (e.target.selected) {
-                this.setAttribute('dark-theme', e.detail);
+                this.setAttribute("dark-theme", e.detail);
                 return;
               }
-              this.removeAttribute('dark-theme');
-            }}">
+              this.removeAttribute("dark-theme");
+            }}"
+          >
           </mwc-switch>
         </mwc-formfield>
-      
+
         <h2>Ripple</h2>
         <div class="demo-box">
           Default
           <dw-ripple enableHover></dw-ripple>
-        </div>
-        <div class="demo-box">
-          Primary
-          <dw-ripple primary enableHover></dw-ripple>
-        </div>
-        <div class="demo-box">
-          Secondary
-          <dw-ripple secondary enableHover tabindex="1"></dw-ripple>
-        </div>
-        <div class="demo-box custom">
-            Custom
-            <dw-ripple enableHover></dw-ripple>
-          </div>
-        <div class="demo-box">
-          unbounded
-          <dw-ripple unbounded enableHover></dw-ripple>
-        </div>
-        <div class="demo-box">
-          disabled
-          <dw-ripple disabled enableHover></dw-ripple>
-        </div>
-
-        <h2>Ripple without hover and focuse</h2>
-        <div class="demo-box">
-          Default
-          <dw-ripple></dw-ripple>
         </div>
         <div class="demo-box">
           Primary
@@ -106,10 +82,22 @@ export class DwRippleDemo extends LitElement {
           Secondary
           <dw-ripple secondary></dw-ripple>
         </div>
+        <div class="demo-box" tabindex="1">
+          Focuse
+          <dw-ripple></dw-ripple>
+        </div>
+        <div class="demo-box">
+          Selected
+          <dw-ripple selected></dw-ripple>
+        </div>
+        <div class="demo-box">
+          Activated
+          <dw-ripple activated></dw-ripple>
+        </div>
         <div class="demo-box custom">
-            Custom
-            <dw-ripple></dw-ripple>
-          </div>
+          Custom
+          <dw-ripple></dw-ripple>
+        </div>
         <div class="demo-box">
           unbounded
           <dw-ripple unbounded></dw-ripple>
@@ -118,9 +106,34 @@ export class DwRippleDemo extends LitElement {
           disabled
           <dw-ripple disabled></dw-ripple>
         </div>
+
+        <h2>Ripple without hover</h2>
+        <div class="demo-box">
+          Default
+          <dw-ripple disableHover></dw-ripple>
+        </div>
+        <div class="demo-box">
+          Primary
+          <dw-ripple primary disableHover></dw-ripple>
+        </div>
+        <div class="demo-box">
+          Secondary
+          <dw-ripple secondary disableHover></dw-ripple>
+        </div>
+        <div class="demo-box custom">
+          Custom
+          <dw-ripple disableHover></dw-ripple>
+        </div>
+        <div class="demo-box">
+          unbounded
+          <dw-ripple unbounded disableHover></dw-ripple>
+        </div>
+        <div class="demo-box">
+          disabled
+          <dw-ripple disabled></dw-ripple>
+        </div>
       </section>
     `;
   }
-
 }
-window.customElements.define('dw-ripple-demo', DwRippleDemo);
+window.customElements.define("dw-ripple-demo", DwRippleDemo);
