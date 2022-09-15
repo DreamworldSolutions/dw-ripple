@@ -45,7 +45,12 @@ export class DwRipple extends Ripple {
       /**
        * Set to `true` if ripple should not be shown
        */
-      disabled: { type: Boolean, reflect: true }
+      disabled: { type: Boolean, reflect: true },
+
+      /**Set to `true` to show hover or focuse in ripple
+       * 
+       */
+      enableHover: { type: Boolean, reflect: true }
     }
   }
 
@@ -69,12 +74,15 @@ export class DwRipple extends Ripple {
     this.__onMouseUp = this.__onMouseUp.bind(this);
     this.__onTouchEnd = this.__onTouchEnd.bind(this);
 
-    parent.addEventListener('mouseenter', this._rippleHander.startHover);
-    parent.addEventListener('mouseleave', this._rippleHander.endHover);
+    if(this.enableHover) {
+      parent.addEventListener('mouseenter', this._rippleHander.startHover);
+      parent.addEventListener('mouseleave', this._rippleHander.endHover);
+      parent.addEventListener('focus', this._rippleHander.startFocus);
+      parent.addEventListener('blur', this._rippleHander.endFocus);
+    }
+
     parent.addEventListener('mousedown', this.__onMouseDown);
     parent.addEventListener('touchstart', this.__onTouchStart);
-    parent.addEventListener('focus', this._rippleHander.startFocus);
-    parent.addEventListener('blur', this._rippleHander.endFocus);
   }
 
   __onMouseDown(e) {
@@ -108,13 +116,16 @@ export class DwRipple extends Ripple {
   disconnectedCallback() {
     const parent = this.__getParentNode();
     if (parent) {
-      parent.removeEventListener('mouseenter', this._rippleHander.startHover);
-      parent.removeEventListener('mouseleave', this._rippleHander.endHover);
+
+      if(this.enableHover) {
+        parent.removeEventListener('mouseenter', this._rippleHander.startHover);
+        parent.removeEventListener('mouseleave', this._rippleHander.endHover);
+        parent.removeEventListener('focus', this._rippleHander.startFocus);
+        parent.removeEventListener('blur', this._rippleHander.endFocus);
+      }
 
       parent.removeEventListener('mousedown', this.__onMouseDown);
       parent.removeEventListener('touchstart', this.__onTouchStart);
-      parent.removeEventListener('focus', this._rippleHander.startFocus);
-      parent.removeEventListener('blur', this._rippleHander.endFocus);
     }
 
     window.removeEventListener('touchend', this.__onTouchEnd);

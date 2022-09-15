@@ -41,6 +41,7 @@ theming variables.
 - `unbounded` Boolean. By defualt ripple effect are shown from the point where user clicks. If we want to show ripple 
 always from the center (irrespective of the click position) then set to `true`. When this is set, ripple is shown in 
 circular shape always.
+- `enableHover` Boolean. Set to enable hover and focuse for ripple.
 
 ## Theming
 By default ripple is shown in `--mdc-theme-on-surface`. That should be ok for most places. When need to change it at

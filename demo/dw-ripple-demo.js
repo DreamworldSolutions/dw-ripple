@@ -70,6 +70,32 @@ export class DwRippleDemo extends LitElement {
         <h2>Ripple</h2>
         <div class="demo-box">
           Default
+          <dw-ripple enableHover></dw-ripple>
+        </div>
+        <div class="demo-box">
+          Primary
+          <dw-ripple primary enableHover></dw-ripple>
+        </div>
+        <div class="demo-box">
+          Secondary
+          <dw-ripple secondary enableHover tabindex="1"></dw-ripple>
+        </div>
+        <div class="demo-box custom">
+            Custom
+            <dw-ripple enableHover></dw-ripple>
+          </div>
+        <div class="demo-box">
+          unbounded
+          <dw-ripple unbounded enableHover></dw-ripple>
+        </div>
+        <div class="demo-box">
+          disabled
+          <dw-ripple disabled enableHover></dw-ripple>
+        </div>
+
+        <h2>Ripple without hover and focuse</h2>
+        <div class="demo-box">
+          Default
           <dw-ripple></dw-ripple>
         </div>
         <div class="demo-box">
