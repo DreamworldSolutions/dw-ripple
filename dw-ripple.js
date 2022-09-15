@@ -47,10 +47,10 @@ export class DwRipple extends Ripple {
        */
       disabled: { type: Boolean, reflect: true },
 
-      /**Set to `true` to show hover or focuse in ripple
-       * 
+      /**
+       * Set to `true` to show hover or focuse in ripple
        */
-      enableHover: { type: Boolean, reflect: true }
+      enableHover: { type: Boolean }
     }
   }
 
@@ -59,6 +59,7 @@ export class DwRipple extends Ripple {
     this.primary = false;
     this.secondary = false;
     this.disabled = false;
+    this.enableHover = false;
   }
 
   connectedCallback() {
