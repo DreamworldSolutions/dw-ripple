@@ -1,4 +1,4 @@
-import { css } from "lit-element";
+import { css } from '@dreamworld/pwa-helpers/lit.js';
 
 // These are the mwc element needed by this element.
 import { Ripple } from "@material/mwc-ripple";

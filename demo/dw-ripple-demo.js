@@ -1,5 +1,4 @@
-import { html, css } from "lit-element";
-import { LitElement } from "@dreamworld/pwa-helpers/lit-element.js";
+import { LitElement, html, css } from '@dreamworld/pwa-helpers/lit.js';
 
 //These are the dw element needed by this element.
 import "../dw-ripple.js";
