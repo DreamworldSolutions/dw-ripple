@@ -24,7 +24,7 @@ export class DwRipple extends Ripple {
       secondary: { type: Boolean, reflect: true },
 
       /**
-       * Set to `true` to disable hover and focuse in.
+       * Set to `true` to disable hover and focus in.
        */
       disableHover: { type: Boolean },
     };
