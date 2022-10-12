@@ -66,28 +66,28 @@ export class DwRipple extends Ripple {
   }
 
   __onMouseDown(e) {
-    this.delayMouseDown = setTimeout(() => {
+    this._timeoutRippleOnMouseDown = setTimeout(() => {
       window.addEventListener("mouseup", this.__onMouseUp);
       this._rippleHander.startPress(e);
     }, 50);
   }
 
   __onTouchStart(e) {
-    this.delayTouchStart = setTimeout(() => {
+    this._timeoutRippleOnTouchStart = setTimeout(() => {
       window.addEventListener("touchend", this.__onTouchEnd);
       this._rippleHander.startPress(e);
     }, 50);
   }
 
   __onPointerMove() {
-    if (this.delayMouseDown) {
-      clearTimeout(this.delayMouseDown);
+    if (this._timeoutRippleOnMouseDown) {
+      clearTimeout(this._timeoutRippleOnMouseDown);
     }
   }
 
   __onTouchMove() {
-    if (this.delayTouchStart) {
-      clearTimeout(this.delayTouchStart);
+    if (this._timeoutRippleOnTouchStart) {
+      clearTimeout(this._timeoutRippleOnTouchStart);
     }
   }
 
