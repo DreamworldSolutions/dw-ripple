@@ -9,8 +9,20 @@ export class DwRipple extends Ripple {
     return [
       super.styles,
       css`
+        :host([disabled]) {
+          --mdc-theme-on-surface: transparent;
+        }
+
+        :host([primary]) {
+          --mdc-theme-on-surface: var(--mdc-theme-primary);
+        }
+
         :host([secondary]) {
-          --mdc-ripple-color: var(--mdc-theme-secondary);
+          --mdc-theme-on-surface: var(--mdc-theme-secondary);
+        }
+        
+        .mdc-ripple-surface::before, .mdc-ripple-surface::after {
+          background-color: var(--mdc-theme-on-surface, #000);
         }
       `,
     ];
