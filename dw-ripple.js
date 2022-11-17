@@ -20,8 +20,9 @@ export class DwRipple extends Ripple {
         :host([secondary]) {
           --mdc-theme-on-surface: var(--mdc-theme-secondary);
         }
-        
-        .mdc-ripple-surface::before, .mdc-ripple-surface::after {
+
+        .mdc-ripple-surface::before,
+        .mdc-ripple-surface::after {
           background-color: var(--mdc-theme-on-surface, #000);
         }
       `,
@@ -78,7 +79,7 @@ export class DwRipple extends Ripple {
   }
 
   __onMouseDown(e) {
-    console.debug("onMouseDown", e);
+    console.debug("__onMouseDown called", e);
     this._timeoutRippleOnMouseDown = setTimeout(() => {
       console.log("timeoutRippleOnMouseDown");
       window.addEventListener("mouseup", this.__onMouseUp);
@@ -87,7 +88,7 @@ export class DwRipple extends Ripple {
   }
 
   __onTouchStart(e) {
-    console.debug("onTouchStart", e);
+    console.debug("__onTouchStart called", e);
     this._timeoutRippleOnTouchStart = setTimeout(() => {
       console.debug("timeoutRippleOnTouchStart");
       window.addEventListener("touchend", this.__onTouchEnd);
@@ -96,27 +97,33 @@ export class DwRipple extends Ripple {
   }
 
   __onPointerMove() {
-    console.debug("onPointerMove");
+    console.debug("__onPointerMove called");
     if (this._timeoutRippleOnMouseDown) {
       clearTimeout(this._timeoutRippleOnMouseDown);
     }
-  }
-
-  __onTouchMove() {
-    console.debug("onTouchMove");
     if (this._timeoutRippleOnTouchStart) {
       clearTimeout(this._timeoutRippleOnTouchStart);
     }
   }
 
+  __onTouchMove() {
+    console.debug("__onTouchMove called");
+    if (this._timeoutRippleOnTouchStart) {
+      clearTimeout(this._timeoutRippleOnTouchStart);
+    }
+    if (this._timeoutRippleOnMouseDown) {
+      clearTimeout(this._timeoutRippleOnMouseDown);
+    }
+  }
+
   __onMouseUp() {
-    console.debug("onMouseUp");
+    console.debug("__onMouseUp called");
     window.removeEventListener("mouseup", this.__onMouseUp);
     this._rippleHander.endPress();
   }
 
   __onTouchEnd() {
-    console.debug("onTouchEnd");
+    console.debug("__onTouchEnd called");
     window.removeEventListener("touchend", this.__onTouchEnd);
     this._rippleHander.endPress();
   }
