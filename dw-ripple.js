@@ -78,37 +78,45 @@ export class DwRipple extends Ripple {
   }
 
   __onMouseDown(e) {
+    console.debug("onMouseDown", e);
     this._timeoutRippleOnMouseDown = setTimeout(() => {
+      console.log("timeoutRippleOnMouseDown");
       window.addEventListener("mouseup", this.__onMouseUp);
       this._rippleHander.startPress(e);
     }, 50);
   }
 
   __onTouchStart(e) {
+    console.debug("onTouchStart", e);
     this._timeoutRippleOnTouchStart = setTimeout(() => {
+      console.debug("timeoutRippleOnTouchStart");
       window.addEventListener("touchend", this.__onTouchEnd);
       this._rippleHander.startPress(e);
     }, 50);
   }
 
   __onPointerMove() {
+    console.debug("onPointerMove");
     if (this._timeoutRippleOnMouseDown) {
       clearTimeout(this._timeoutRippleOnMouseDown);
     }
   }
 
   __onTouchMove() {
+    console.debug("onTouchMove");
     if (this._timeoutRippleOnTouchStart) {
       clearTimeout(this._timeoutRippleOnTouchStart);
     }
   }
 
   __onMouseUp() {
+    console.debug("onMouseUp");
     window.removeEventListener("mouseup", this.__onMouseUp);
     this._rippleHander.endPress();
   }
 
   __onTouchEnd() {
+    console.debug("onTouchEnd");
     window.removeEventListener("touchend", this.__onTouchEnd);
     this._rippleHander.endPress();
   }
