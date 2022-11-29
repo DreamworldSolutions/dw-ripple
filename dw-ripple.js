@@ -81,7 +81,7 @@ export class DwRipple extends Ripple {
   __onMouseDown(e) {
     console.debug("__onMouseDown called", e);
     this._timeoutRippleOnMouseDown = setTimeout(() => {
-      console.log("timeoutRippleOnMouseDown");
+      console.debug("timeoutRippleOnMouseDown");
       window.addEventListener("mouseup", this.__onMouseUp);
       this._rippleHander.startPress(e);
     }, 50);
