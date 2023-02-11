@@ -79,25 +79,20 @@ export class DwRipple extends Ripple {
   }
 
   __onMouseDown(e) {
-    console.debug("__onMouseDown called", e);
     this._timeoutRippleOnMouseDown = setTimeout(() => {
-      console.debug("timeoutRippleOnMouseDown");
       window.addEventListener("mouseup", this.__onMouseUp);
       this._rippleHander.startPress(e);
     }, 50);
   }
 
   __onTouchStart(e) {
-    console.debug("__onTouchStart called", e);
     this._timeoutRippleOnTouchStart = setTimeout(() => {
-      console.debug("timeoutRippleOnTouchStart");
       window.addEventListener("touchend", this.__onTouchEnd);
       this._rippleHander.startPress(e);
     }, 50);
   }
 
   __onPointerMove() {
-    console.debug("__onPointerMove called");
     if (this._timeoutRippleOnMouseDown) {
       clearTimeout(this._timeoutRippleOnMouseDown);
     }
@@ -107,7 +102,6 @@ export class DwRipple extends Ripple {
   }
 
   __onTouchMove() {
-    console.debug("__onTouchMove called");
     if (this._timeoutRippleOnTouchStart) {
       clearTimeout(this._timeoutRippleOnTouchStart);
     }
@@ -117,13 +111,11 @@ export class DwRipple extends Ripple {
   }
 
   __onMouseUp() {
-    console.debug("__onMouseUp called");
     window.removeEventListener("mouseup", this.__onMouseUp);
     this._rippleHander.endPress();
   }
 
   __onTouchEnd() {
-    console.debug("__onTouchEnd called");
     window.removeEventListener("touchend", this.__onTouchEnd);
     this._rippleHander.endPress();
   }
