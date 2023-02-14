@@ -151,4 +151,4 @@ export class DwRipple extends Ripple {
   }
 }
 
-window.customElements.define("dw-ripple", DwRipple);
+customElements.define("dw-ripple", DwRipple);
