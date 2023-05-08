@@ -4,6 +4,7 @@ import { css } from '@dreamworld/pwa-helpers/lit.js';
 import { Ripple } from "@material/mwc-ripple";
 import { RippleHandlers } from "@material/mwc-ripple/ripple-handlers";
 
+let rippleTimeout;
 export class DwRipple extends Ripple {
   static get styles() {
     return [
@@ -62,8 +63,6 @@ export class DwRipple extends Ripple {
     this.__onTouchStart = this.__onTouchStart.bind(this);
     this.__onMouseUp = this.__onMouseUp.bind(this);
     this.__onTouchEnd = this.__onTouchEnd.bind(this);
-    this.__onPointerMove = this.__onPointerMove.bind(this);
-    this.__onTouchMove = this.__onTouchMove.bind(this);
 
     if (!this.disableHover) {
       parent.addEventListener("mouseenter", this._rippleHander.startHover);
@@ -74,40 +73,20 @@ export class DwRipple extends Ripple {
 
     parent.addEventListener("mousedown", this.__onMouseDown);
     parent.addEventListener("touchstart", this.__onTouchStart);
-    window.addEventListener("pointermove", this.__onPointerMove);
-    window.addEventListener("touchmove", this.__onTouchMove);
   }
 
   __onMouseDown(e) {
-    this._timeoutRippleOnMouseDown = setTimeout(() => {
+    rippleTimeout = setTimeout(() => {
       window.addEventListener("mouseup", this.__onMouseUp);
       this._rippleHander.startPress(e);
     }, 50);
   }
 
   __onTouchStart(e) {
-    this._timeoutRippleOnTouchStart = setTimeout(() => {
+    rippleTimeout = setTimeout(() => {
       window.addEventListener("touchend", this.__onTouchEnd);
       this._rippleHander.startPress(e);
     }, 50);
-  }
-
-  __onPointerMove() {
-    if (this._timeoutRippleOnMouseDown) {
-      clearTimeout(this._timeoutRippleOnMouseDown);
-    }
-    if (this._timeoutRippleOnTouchStart) {
-      clearTimeout(this._timeoutRippleOnTouchStart);
-    }
-  }
-
-  __onTouchMove() {
-    if (this._timeoutRippleOnTouchStart) {
-      clearTimeout(this._timeoutRippleOnTouchStart);
-    }
-    if (this._timeoutRippleOnMouseDown) {
-      clearTimeout(this._timeoutRippleOnMouseDown);
-    }
   }
 
   __onMouseUp() {
@@ -144,11 +123,18 @@ export class DwRipple extends Ripple {
 
     window.removeEventListener("touchend", this.__onTouchEnd);
     window.removeEventListener("mouseup", this.__onMouseUp);
-    window.removeEventListener("pointermove", this.__onPointerMove);
-    window.removeEventListener("touchmove", this.__onTouchMove);
 
     super.disconnectedCallback();
   }
 }
 
 customElements.define("dw-ripple", DwRipple);
+
+// Its prevent ripple in touch device while user is scrolling list.
+const _onTouchMove = () => {
+  if (rippleTimeout) {
+    clearTimeout(rippleTimeout);
+    rippleTimeout = null;
+  }
+};
+window.addEventListener("touchmove", _onTouchMove);
