@@ -72,7 +72,7 @@ export class DwRipple extends Ripple {
     }
 
     parent.addEventListener("mousedown", this.__onMouseDown);
-    parent.addEventListener("touchstart", this.__onTouchStart);
+    parent.addEventListener("touchstart", this.__onTouchStart, { passive: true });
   }
 
   __onMouseDown(e) {
@@ -118,7 +118,7 @@ export class DwRipple extends Ripple {
       }
 
       parent.removeEventListener("mousedown", this.__onMouseDown);
-      parent.removeEventListener("touchstart", this.__onTouchStart);
+      parent.removeEventListener("touchstart", this.__onTouchStart, { passive: true });
     }
 
     window.removeEventListener("touchend", this.__onTouchEnd);
