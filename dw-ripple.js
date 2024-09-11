@@ -74,7 +74,7 @@ export class DwRipple extends Ripple {
       parent.addEventListener("blur", this._rippleHander.endFocus);
     }
 
-    !isTouch && parent.addEventListener("mousedown", this.__onMouseDown, { passive: true });
+    !isTouch && parent.addEventListener("mousedown", this.__onMouseDown);
     isTouch && parent.addEventListener("touchstart", this.__onTouchStart, { passive: true });
   }
 
@@ -120,7 +120,7 @@ export class DwRipple extends Ripple {
         parent.removeEventListener("blur", this._rippleHander.endFocus);
       }
 
-      !isTouch && parent.removeEventListener("mousedown", this.__onMouseDown, { passive: true });
+      !isTouch && parent.removeEventListener("mousedown", this.__onMouseDown);
       isTouch && parent.removeEventListener("touchstart", this.__onTouchStart, { passive: true });
     }
 
