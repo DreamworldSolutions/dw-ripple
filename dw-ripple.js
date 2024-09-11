@@ -3,8 +3,11 @@ import { css } from '@dreamworld/pwa-helpers/lit.js';
 // These are the mwc element needed by this element.
 import { Ripple } from "@material/mwc-ripple";
 import { RippleHandlers } from "@material/mwc-ripple/ripple-handlers";
+import DeviceInfo from '@dreamworld/device-info';
 
 let rippleTimeout;
+const isTouch = DeviceInfo.info().touch;
+
 export class DwRipple extends Ripple {
   static get styles() {
     return [
@@ -71,8 +74,8 @@ export class DwRipple extends Ripple {
       parent.addEventListener("blur", this._rippleHander.endFocus);
     }
 
-    parent.addEventListener("mousedown", this.__onMouseDown);
-    parent.addEventListener("touchstart", this.__onTouchStart, { passive: true });
+    !isTouch && parent.addEventListener("mousedown", this.__onMouseDown, { passive: true });
+    isTouch && parent.addEventListener("touchstart", this.__onTouchStart, { passive: true });
   }
 
   __onMouseDown(e) {
@@ -117,12 +120,12 @@ export class DwRipple extends Ripple {
         parent.removeEventListener("blur", this._rippleHander.endFocus);
       }
 
-      parent.removeEventListener("mousedown", this.__onMouseDown);
-      parent.removeEventListener("touchstart", this.__onTouchStart, { passive: true });
+      !isTouch && parent.removeEventListener("mousedown", this.__onMouseDown, { passive: true });
+      isTouch && parent.removeEventListener("touchstart", this.__onTouchStart, { passive: true });
     }
 
-    window.removeEventListener("touchend", this.__onTouchEnd);
-    window.removeEventListener("mouseup", this.__onMouseUp);
+    isTouch && window.removeEventListener("touchend", this.__onTouchEnd);
+    !isTouch && window.removeEventListener("mouseup", this.__onMouseUp);
 
     super.disconnectedCallback();
   }
