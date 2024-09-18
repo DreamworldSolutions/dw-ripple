@@ -29,6 +29,10 @@ export class DwRipple extends Ripple {
         .mdc-ripple-surface::after {
           background-color: var(--mdc-theme-on-surface, #000);
         }
+
+        .mdc-ripple-surface {
+          border-radius: var(--mdc-ripple-border-radius, 0);
+        }
       `,
     ];
   }
