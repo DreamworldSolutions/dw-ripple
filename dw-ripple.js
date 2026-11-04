@@ -1,4 +1,4 @@
-import { css } from 'lit-element';
+import { css } from 'lit';
 
 // These are the mwc element needed by this element.
 import { Ripple } from '@material/mwc-ripple';
@@ -72,7 +72,7 @@ export class DwRipple extends Ripple {
     parent.addEventListener('mouseenter', this._rippleHander.startHover);
     parent.addEventListener('mouseleave', this._rippleHander.endHover);
     parent.addEventListener('mousedown', this.__onMouseDown);
-    parent.addEventListener('touchstart', this.__onTouchStart);
+    parent.addEventListener('touchstart', this.__onTouchStart, { passive: true });
     parent.addEventListener('focus', this._rippleHander.startFocus);
     parent.addEventListener('blur', this._rippleHander.endFocus);
   }
